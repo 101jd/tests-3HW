@@ -1,4 +1,4 @@
-package seminars.third.tdd;
+package org._jd.tdd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +9,24 @@ public class UserRepository {
     List<User> data = new ArrayList<>();
 
     public void addUser(User user) {
-       //..
+        if (user.isAuthenticate)
+           data.add(user);
     }
 
-    public boolean findByName(String username) {
+    public User findByName(String username) {
         for (User user : data) {
             if (user.name.equals(username)) {
-                return true;
+                return user;
             }
         }
-        return false;
+        return null;
+    }
+
+    public void logoutAll(){
+        for (User user : data){
+            if (!user.isAdmin())
+                user.logout();
+        }
     }
 
 }
